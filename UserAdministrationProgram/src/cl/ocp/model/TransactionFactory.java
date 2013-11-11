@@ -13,6 +13,7 @@ public class TransactionFactory {
 	
 	private static EntityManagerFactory emf;
 	private static EntityManager em;
+	private static int lastID;
 	
 	public static void createFctoryConnection(String persistenceName)
 	{
@@ -31,7 +32,8 @@ public class TransactionFactory {
 			Query listAllUsers = em.createNamedQuery("Usuario.findAll");
 			List<Usuario> userList = listAllUsers.getResultList();
 			Iterator<Usuario> i = userList.iterator();
-			while(i.hasNext()){
+			while(i.hasNext())
+			{
 				Usuario u = i.next();
 				modelUsers.addRow(new Object[]{u.getIdusuarios(), 
                         					   u.getUsername(), 
@@ -41,12 +43,21 @@ public class TransactionFactory {
                         					   u.getDirection(),
                         					   u.getTelephone(),
                         					   u.getEmail()});
-				
+			setLastID(u.getIdusuarios());
 			}
 		}catch(Exception e){
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
+
+	public static int getLastID() {
+		return lastID;
+	}
+
+	public static void setLastID(int lastID) {
+		TransactionFactory.lastID = lastID;
+	}
+
 	
 	
 }

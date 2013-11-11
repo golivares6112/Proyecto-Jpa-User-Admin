@@ -109,8 +109,7 @@ public class PanelEnsambling implements ActionListener{
         		ObjectCreator.constructorBorderPanel("User Data Information", "Serif", 1, 11);
         jpd.setBorder(bordePanelTitulo);
         jpd.setLayout(new BorderLayout());
-        modelUsers = new DefaultTableModel(); //definimos el model donde va la informacion
-    	
+        modelUsers = new DefaultTableModel(); //definimos el model donde va la informacion	
     	modelUsers.addColumn("ID Users");
     	modelUsers.addColumn("Username");
     	modelUsers.addColumn("Password");
@@ -121,6 +120,7 @@ public class PanelEnsambling implements ActionListener{
     	modelUsers.addColumn("Email");
     	TransactionFactory.createFctoryConnection("JPAuserAdministrationProgram");
     	TransactionFactory.loadAllUsers(modelUsers);
+    	System.out.println("Ultimo Dato : " + TransactionFactory.getLastID());
     	tableUsers = new JTable(modelUsers); //definimos la tabla que recibira el model
     	tableUsers.setFillsViewportHeight(true);
 		JScrollPane scrollPaneTableUsers = new JScrollPane(tableUsers); //le entregamos la tabla al scroll
@@ -145,6 +145,8 @@ public class PanelEnsambling implements ActionListener{
     	jpb.setLayout(contenedor);
     	lbId = ObjectCreator.constructorLabel("ID Username : ", "Serif", 1, 11);	
         tfId = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
+        tfId.setText(Integer.toString(TransactionFactory.getLastID() + 1));
+        tfId.setEditable(false);
         tfId.setColumns(3);
     	jpb.add(lbId);
     	jpb.add(tfId);
@@ -258,7 +260,7 @@ public class PanelEnsambling implements ActionListener{
     	jpcb.setBorder(bordePanelTitulo);
     	contenedor = new FlowLayout(FlowLayout.CENTER);
     	jpcb.setLayout(contenedor);
-    	jbAddUser = ObjectCreator.constructorButton("Add User", "Serif", 1, 11);
+    	jbAddUser = ObjectCreator.constructorButton("Add", "Serif", 1, 11);
     	btCancelar = ObjectCreator.constructorButton("Cancel Add", "Serif", 1, 11);
     	jpcb.add(jbAddUser);
     	jpcb.add(btCancelar);

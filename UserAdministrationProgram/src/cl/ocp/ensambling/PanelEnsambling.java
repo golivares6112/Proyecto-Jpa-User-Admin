@@ -14,8 +14,11 @@ import javax.swing.JPasswordField;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 import cl.ocp.model.TransactionFactory;
 import cl.ocp.object.ObjectCreator;
@@ -88,7 +91,7 @@ public class PanelEnsambling implements ActionListener{
     	contenedor = new FlowLayout(FlowLayout.RIGHT);
         jpb.setLayout(contenedor);
         lbusernameBuscar = ObjectCreator.constructorLabel("Find Username : ", "Serif", 1, 11);
-        tfBuscarUsername = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
+        tfBuscarUsername = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
         tfBuscarUsername.setColumns(8);
         buscar = ObjectCreator.constructorButton("Find", "Serif", 1, 11);
         buscar.addActionListener(this);
@@ -122,7 +125,8 @@ public class PanelEnsambling implements ActionListener{
     	tableUsers.setFillsViewportHeight(true);
 		JScrollPane scrollPaneTableUsers = new JScrollPane(tableUsers); //le entregamos la tabla al scroll
 		scrollPaneTableUsers.setPreferredSize(new Dimension(150,200));
-		
+		this.centrarDatosTabla(tableUsers);
+		this.centrarTituloTabla(tableUsers);
    
     	jpd.add(scrollPaneTableUsers, BorderLayout.CENTER);
     	
@@ -286,13 +290,31 @@ public class PanelEnsambling implements ActionListener{
 	        {
 	        	JOptionPane.showMessageDialog(null,
 	     			       "No se encontro el username", //Mensaje
-	     			       "Mensaje de Error", //T’tulo
+	     			       "Mensaje de Error", //Tï¿½tulo
 	     			       JOptionPane.ERROR_MESSAGE);
 	        }
 		}
 		
 	}
     
+	private void centrarDatosTabla(JTable tabla)
+	{
+		  DefaultTableCellRenderer modelocentrar = new DefaultTableCellRenderer();
+          modelocentrar.setHorizontalAlignment(SwingConstants.CENTER);
+          tabla.getColumnModel().getColumn(0).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(1).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(2).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(3).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(4).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(5).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(6).setCellRenderer(modelocentrar);
+          tabla.getColumnModel().getColumn(7).setCellRenderer(modelocentrar);
+	}
 	
-    
+    private void centrarTituloTabla(JTable tabla)
+    {
+    	TableCellRenderer rendererFromHeader = tabla.getTableHeader().getDefaultRenderer();
+    	JLabel headerLabel = (JLabel) rendererFromHeader;
+    	headerLabel.setHorizontalAlignment(JLabel.CENTER);
+    }
 }

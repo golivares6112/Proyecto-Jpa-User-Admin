@@ -25,7 +25,8 @@ public class TransactionFactory {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public static void loadAllUsers(DefaultTableModel modelUsers){
+	public static void loadAllUsers(DefaultTableModel modelUsers)
+	{
 		try{
 			Query listAllUsers = em.createNamedQuery("Usuario.findAll");
 			List<Usuario> userList = listAllUsers.getResultList();
@@ -46,4 +47,6 @@ public class TransactionFactory {
 			System.out.println("ERROR : " + e.getMessage());
 		}
 	}
+	
+	
 }

@@ -15,11 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
 import javax.swing.border.TitledBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
 
+import cl.ocp.interfaceapp.AddUserForm;
+import cl.ocp.interfaceapp.ApplicationInterface;
 import cl.ocp.model.TransactionFactory;
 import cl.ocp.object.ObjectCreator;
 
@@ -38,6 +41,7 @@ public class PanelEnsambling implements ActionListener{
 	private  JTextField tfDireccion, tfTelefono, tfEmail;
 	private  JPasswordField pfPassword;
 	private  JButton jbAddUser, btCancelar;
+	private AddUserForm addUserF;
 	
     public JPanel panelTitulo()
     {
@@ -268,7 +272,8 @@ public class PanelEnsambling implements ActionListener{
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent ae) {
+	public void actionPerformed(ActionEvent ae) 
+	{
 		
 		String action = ae.getActionCommand();
 	    int error = 0;
@@ -297,6 +302,20 @@ public class PanelEnsambling implements ActionListener{
 	        }
 		}
 		
+		if(action.equalsIgnoreCase("Add User"))
+		{
+			SwingUtilities.invokeLater(new Runnable()
+			{
+				@Override
+				public void run() 
+				{
+					addUserF = new AddUserForm(new ApplicationInterface(), true, "Add User Form");
+					addUserF.setVisible(true);	
+				}
+				
+			});
+			
+		}
 	}
     
 	private void centrarDatosTabla(JTable tabla)
@@ -319,4 +338,5 @@ public class PanelEnsambling implements ActionListener{
     	JLabel headerLabel = (JLabel) rendererFromHeader;
     	headerLabel.setHorizontalAlignment(JLabel.CENTER);
     }
+    
 }

@@ -3,9 +3,6 @@ package cl.ocp.interfaceapp;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -13,7 +10,7 @@ import javax.swing.JPanel;
 import cl.ocp.ensambling.PanelEnsambling;
 
 
-public class AddUserForm extends JDialog implements ActionListener{
+public class AddUserForm extends JDialog{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel pnNorth, pnCenter, pnSouth;
@@ -43,14 +40,4 @@ public class AddUserForm extends JDialog implements ActionListener{
 		this.setLocation((screenSize.width - this.getWidth()) / 2, (screenSize.height - this.getHeight()) / 2);
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent ae) 
-	{
-		String action = ae.getActionCommand();
-		
-		if(action.equalsIgnoreCase("Cancel Add"))
-		{
-			this.setVisible(false);
-		}
-	}
 }

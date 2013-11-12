@@ -12,19 +12,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
 
-import cl.ocp.controller.ObjectController;
-
 public class ObjectCreator {
-	
-	private static ObjectController objController;
 	
 	 public static JButton constructorButton(String titulo, String fuente, int negrita, int tam)
 	    {
 		 	JButton b = new JButton(titulo);
-		 	objController = new ObjectController(); 
 		 	b.setFont(new Font(fuente, negrita, tam));
-		 	b.setActionCommand(titulo);
-		 	b.addActionListener(objController);
 		 	
 		 	return b;
 	    }

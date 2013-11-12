@@ -18,8 +18,10 @@ public class TransactionFactory {
 	public static void createFctoryConnection(String persistenceName)
 	{
 		try{
+			
 			emf = Persistence.createEntityManagerFactory(persistenceName);
 			em = emf.createEntityManager();
+			
 		}catch(Exception e){
 			System.out.println("ERROR : " + e.getMessage());
 		}

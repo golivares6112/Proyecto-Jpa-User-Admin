@@ -88,6 +88,5 @@ public class ObjectCreator {
 	        progressBar.setFont(new Font(fuente, negrita, tam));
 				
 	        return progressBar;
-	    }
-		    
+	    }    
 }

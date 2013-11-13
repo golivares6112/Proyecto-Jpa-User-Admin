@@ -118,7 +118,6 @@ public class PanelEnsambling implements ActionListener{
     	modelUsers.addColumn("Email");
     	TransactionFactory.createFctoryConnection("JPAuserAdministrationProgram");
     	TransactionFactory.loadAllUsers(modelUsers);
-    	System.out.println("Ultimo Dato : " + TransactionFactory.getLastID());
     	tableUsers = new JTable(modelUsers); //definimos la tabla que recibira el model
     	tableUsers.setFillsViewportHeight(true);
 		JScrollPane scrollPaneTableUsers = new JScrollPane(tableUsers); //le entregamos la tabla al scroll
@@ -159,8 +158,8 @@ public class PanelEnsambling implements ActionListener{
 	        if(error == 1)
 	        {
 	        	JOptionPane.showMessageDialog(null,
-	     			       "No se encontro el username", //Mensaje
-	     			       "Mensaje de Error", //T�tulo
+	     			       "No se encontro el username", 
+	     			       "Mensaje de Error",
 	     			       JOptionPane.ERROR_MESSAGE);
 	        }
 		}

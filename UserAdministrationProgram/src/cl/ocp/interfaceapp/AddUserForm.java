@@ -4,20 +4,24 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
 import cl.ocp.model.TransactionFactory;
 import cl.ocp.object.ObjectCreator;
 
 
-public class AddUserForm extends JDialog{
+public class AddUserForm extends JDialog implements ActionListener{
 
 	private static final long serialVersionUID = 1L;
 	private JPanel pnNorth, pnCenter, pnSouth;
@@ -90,11 +94,11 @@ public class AddUserForm extends JDialog{
     	tfUsername = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
     	pfPassword = ObjectCreator.constructorPasswordField("Serif", 1, 11);
     	pfPassword.setColumns(15);
-    	tfName = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
-    	tfLastName = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
-    	tfDireccion = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
-    	tfTelefono = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
-    	tfEmail = ObjectCreator.constructorJTextField(" ", "Serif", 1, 11);
+    	tfName = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
+    	tfLastName = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
+    	tfDireccion = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
+    	tfTelefono = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
+    	tfEmail = ObjectCreator.constructorJTextField("", "Serif", 1, 11);
     	
     	org.jdesktop.layout.GroupLayout jPanel1Layout = new org.jdesktop.layout.GroupLayout(jpd);
     	jpd.setLayout(jPanel1Layout);
@@ -179,10 +183,56 @@ public class AddUserForm extends JDialog{
     	contenedor = new FlowLayout(FlowLayout.CENTER);
     	jpcb.setLayout(contenedor);
     	jbAddUser = ObjectCreator.constructorButton("Add", "Serif", 1, 11);
+    	jbAddUser.addActionListener(this);
+    	jbAddUser.setActionCommand("Add");
     	btCancelar = ObjectCreator.constructorButton("Cancel Add", "Serif", 1, 11);
+    	btCancelar.addActionListener(this);
+    	btCancelar.setActionCommand("Cancel Add");
     	jpcb.add(jbAddUser);
     	jpcb.add(btCancelar);
 		return jpcb;
 	}
 
+	@Override
+	public void actionPerformed(ActionEvent event) 
+	{
+		String action = event.getActionCommand();
+		
+		if(action.equalsIgnoreCase("Cancel Add"))
+		{
+			this.dispose();
+		}
+		
+		if(action.equalsIgnoreCase("Add"))
+		{
+			if(validarDatos())
+			{
+				JOptionPane.showMessageDialog(null,
+	     			       "Campo Vacio", 
+	     			       "Uno de los Campos se Encuentra Vacio", 
+	     			       JOptionPane.ERROR_MESSAGE);
+			}else{
+				JOptionPane.showMessageDialog(null,
+	     			       "Usuario Registrado", 
+	     			       "Usuario Registrado Exitosamente", 
+	     			       JOptionPane.INFORMATION_MESSAGE);
+				this.dispose();
+			}
+		}
+		
+	}
+	
+	public boolean validarDatos()
+	{
+		boolean condicion = false;
+		if( tfUsername.getText().isEmpty() || tfName.getText().isEmpty() || tfLastName.getText().isEmpty() ||
+			tfDireccion.getText().isEmpty() || tfTelefono.getText().isEmpty() || tfEmail.getText().isEmpty() ||
+			pfPassword.getPassword().length == 0)
+		{
+			condicion = true;
+		}
+		
+		return condicion;
+	}
+	
 }

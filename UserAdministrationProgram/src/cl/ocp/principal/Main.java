@@ -7,9 +7,11 @@ import cl.ocp.interfaceapp.ApplicationInterface;
 public class Main {
 	public static void main(String[] args)
     {
-        SwingUtilities.invokeLater(new Runnable(){
+        SwingUtilities.invokeLater(new Runnable()
+        {
             @Override
-            public void run(){
+            public void run()
+            {
                 new ApplicationInterface().setVisible(true);
             }
         });
